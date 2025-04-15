@@ -1,7 +1,14 @@
 import 'package:dictonary/commonpage/common.dart';
+import 'package:dictonary/favrotepage/fav.dart';
+import 'package:dictonary/favrotepage/model/fav_model.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  await Hive.openBox('favorites');
+  //Hive.registerAdapter(FavoriteWordAdapter());
   runApp(const MyApp());
 }
 
@@ -18,12 +25,14 @@ class MyApp extends StatelessWidget {
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
+
         ),
       ),
       darkTheme: ThemeData.dark().copyWith(
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
+
         ),
       ),
     );
