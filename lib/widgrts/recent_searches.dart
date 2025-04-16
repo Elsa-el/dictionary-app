@@ -5,10 +5,10 @@ class RecentSearches extends StatelessWidget {
   final Function(String) onSearch;
 
   const RecentSearches({
-    Key? key,
+    super.key,
     required this.recentSearches,
     required this.onSearch,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

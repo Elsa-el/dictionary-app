@@ -1,6 +1,4 @@
 import 'package:dictonary/commonpage/common.dart';
-import 'package:dictonary/favrotepage/fav.dart';
-import 'package:dictonary/favrotepage/model/fav_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

@@ -6,10 +6,10 @@ class SynonymsTab extends StatelessWidget {
   final Function(String) onSearch;
 
   const SynonymsTab({
-    Key? key,
+    super.key,
     required this.wordData,
     required this.onSearch,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -5,8 +5,7 @@ import 'package:just_audio/just_audio.dart';
 class AudioPlayerWidget extends StatefulWidget {
   final List<Phonetic> phonetics;
 
-  const AudioPlayerWidget({Key? key, required this.phonetics})
-    : super(key: key);
+  const AudioPlayerWidget({super.key, required this.phonetics});
 
   @override
   State<AudioPlayerWidget> createState() => _AudioPlayerWidgetState();

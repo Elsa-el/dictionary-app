@@ -4,7 +4,7 @@ import '../models/dictionary_model.dart';
 class DefinitionTab extends StatelessWidget {
   final DictionaryResponse wordData;
 
-  const DefinitionTab({Key? key, required this.wordData}) : super(key: key);
+  const DefinitionTab({super.key, required this.wordData});
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +58,11 @@ class DefinitionTab extends StatelessWidget {
                         ],
                       ),
                     );
-                  }).toList(),
+                  }),
                 ],
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );

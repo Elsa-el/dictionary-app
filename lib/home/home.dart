@@ -1,3 +1,4 @@
+import 'package:dictonary/commonpage/fav_shared.dart';
 import 'package:dictonary/widgrts/antonyms_tab.dart';
 import 'package:dictonary/widgrts/audio_player.dart';
 import 'package:dictonary/widgrts/defination_tab.dart';
@@ -6,9 +7,10 @@ import 'package:dictonary/widgrts/synonyms_tab.dart';
 import 'package:flutter/material.dart';
 import '../services/dictionary_service.dart';
 import '../models/dictionary_model.dart';
-import 'package:hive/hive.dart';
 
 class DictionaryHomePage extends StatefulWidget {
+  const DictionaryHomePage({super.key});
+
   @override
   _DictionaryHomePageState createState() => _DictionaryHomePageState();
 }
@@ -16,16 +18,27 @@ class DictionaryHomePage extends StatefulWidget {
 class _DictionaryHomePageState extends State<DictionaryHomePage>
     with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
-  List<String> _recentSearches = [];
+  final List<String> _recentSearches = [];
   bool _isLoading = false;
   String? _errorMessage;
   DictionaryResponse? _wordData;
   late TabController _tabController;
+  bool isFav = false;
+
+  List<String> fav = [];
 
   @override
   void initState() {
     super.initState();
+    loadData();
     _tabController = TabController(length: 3, vsync: this);
+  }
+
+  Future<void> loadData() async {
+    final updated = await getData();
+    setState(() {
+      fav = updated;
+    });
   }
 
   Future<void> _performSearch(String query) async {
@@ -65,6 +78,7 @@ class _DictionaryHomePageState extends State<DictionaryHomePage>
 
   @override
   Widget build(BuildContext context) {
+    print(fav);
     return Scaffold(
       appBar: AppBar(
         title: const Text('DICTIONARY'),
@@ -130,6 +144,24 @@ class _DictionaryHomePageState extends State<DictionaryHomePage>
                             style: const TextStyle(
                               fontSize: 28,
                               fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () async {
+                              if (fav.contains(_wordData!.word)) {
+                                await removeData(_wordData!.word);
+                              } else {
+                                await addData(_wordData!.word);
+                              }
+                              final update = await getData();
+                              setState(() {
+                                fav = update;
+                              });
+                            },
+                            icon: Icon(
+                              fav.contains(_wordData!.word)
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
                             ),
                           ),
                           AudioPlayerWidget(phonetics: _wordData!.phonetics),
