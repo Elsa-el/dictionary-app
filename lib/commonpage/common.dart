@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:dictonary/home/home.dart';
 
 class Common extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Remove MaterialApp here - it should only exist in main.dart
     return BottomNavExample();
   }
 }
@@ -16,10 +16,11 @@ class BottomNavExample extends StatefulWidget {
 class _BottomNavExampleState extends State<BottomNavExample> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _pages = <Widget>[
-    Center(child: Text('Home Page')),
-    Center(child: Text('Favorites Page')),
-    Center(child: Text('Settings Page')),
+  // Replace the placeholder widgets with your actual pages
+  final List<Widget> _pages = <Widget>[
+    DictionaryHomePage(), // This is your home page
+    const Center(child: Text('Favorites Page')), // Keep or replace with FavoritesPage
+    const Center(child: Text('Settings Page')),  // Keep or replace with SettingsPage
   ];
 
   void _onItemTapped(int index) {
@@ -31,11 +32,14 @@ class _BottomNavExampleState extends State<BottomNavExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bottom Navigation')),
+      appBar: null,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Favorites',
